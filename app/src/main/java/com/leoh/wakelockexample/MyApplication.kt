@@ -1,6 +1,7 @@
 package com.leoh.wakelockexample
 
 import android.app.Application
+import android.util.Log
 import com.elvishew.xlog.LogConfiguration
 import com.elvishew.xlog.LogLevel
 import com.elvishew.xlog.XLog
@@ -29,9 +30,11 @@ class MyApplication : Application() {
 
 		val androidPrinter = AndroidPrinter(true)
 		val consolePrinter = ConsolePrinter()
+		val dir = obbDir ?: externalCacheDir ?: filesDir
+		Log.d("App", "Log directory: $dir")
 		val filePrinter =
 			FilePrinter
-				.Builder(File(externalCacheDir, "log").absolutePath)
+				.Builder(File(dir, "log").absolutePath)
 				.fileNameGenerator(DateTimeFileNameGenerator())
 				.backupStrategy(NeverBackupStrategy())
 				.flattener(ClassicFlattener())
