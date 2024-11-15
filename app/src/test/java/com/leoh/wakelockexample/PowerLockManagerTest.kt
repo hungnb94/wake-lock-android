@@ -7,9 +7,11 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.google.common.truth.Truth.assertThat
 import org.junit.Test
 import org.junit.runner.RunWith
+import org.robolectric.annotation.Config
 import java.util.concurrent.TimeUnit
 
 @RunWith(AndroidJUnit4::class)
+@Config(maxSdk = 34)
 class PowerLockManagerTest {
 	private val context: Context = ApplicationProvider.getApplicationContext()
 
