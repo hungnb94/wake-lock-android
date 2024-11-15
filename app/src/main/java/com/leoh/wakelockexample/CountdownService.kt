@@ -103,6 +103,8 @@ class CountdownService : Service() {
 	}
 
 	private fun performNetworkRequest() {
+		XLog.d("Check connected: ${NetworkUtils.isNetworkConnected(this)}")
+		XLog.d("Check connecting: ${NetworkUtils.isNetworkConnectedOrConnecting(this)}")
 		retrofitService.getData().enqueue(
 			object : Callback<Any> {
 				override fun onResponse(
