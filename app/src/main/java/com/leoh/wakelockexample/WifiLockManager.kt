@@ -5,7 +5,7 @@ import android.net.wifi.WifiManager
 import android.net.wifi.WifiManager.WifiLock
 import android.os.Build
 
-class AndroidNetworkManager {
+class WifiLockManager {
 	private var wifiLock: WifiLock? = null
 
 	fun acquireWifiLock(context: Context) {
@@ -17,13 +17,17 @@ class AndroidNetworkManager {
 				WifiManager.WIFI_MODE_FULL_HIGH_PERF
 			}
 		wifiLock =
-			wifiManager.createWifiLock(lockType, "MyApp::WifiLock")
+			wifiManager.createWifiLock(lockType, "femom::WifiWakeLock")
 		wifiLock?.acquire()
 	}
 
+	fun isHeld(): Boolean = wifiLock?.isHeld == true
+
 	fun releaseWifiLock() {
-		if (wifiLock != null && wifiLock!!.isHeld) {
-			wifiLock!!.release()
+		wifiLock?.let { lock ->
+			if (lock.isHeld) {
+				lock.release()
+			}
 		}
 	}
 }

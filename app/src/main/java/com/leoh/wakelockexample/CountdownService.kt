@@ -35,8 +35,8 @@ class CountdownService : Service() {
 	private val retrofitService by lazy { createRetrofitService() }
 	private val coroutineScope = CoroutineScope(Dispatchers.Default + SupervisorJob())
 	private val logger = XLog.tag(TAG)
-	private val powerManager = AndroidPowerManager()
-	private val networkManager = AndroidNetworkManager()
+	private val powerManager = PowerLockManager()
+	private val wifiManager = WifiLockManager()
 
 	override fun onCreate() {
 		super.onCreate()
@@ -44,7 +44,7 @@ class CountdownService : Service() {
 		createNotificationChannel()
 		startForeground(NOTIFICATION_ID, buildNotification(DURATION.toInt()))
 		powerManager.acquireWakeLock(this, TimeUnit.SECONDS.toMillis(DURATION))
-		networkManager.acquireWifiLock(this)
+		wifiManager.acquireWifiLock(this)
 		startCountdown()
 	}
 
@@ -111,7 +111,7 @@ class CountdownService : Service() {
 				) {
 					updateFinalNotification(response.isSuccessful)
 					powerManager.releaseWakeLock()
-					networkManager.releaseWifiLock()
+					wifiManager.releaseWifiLock()
 				}
 
 				override fun onFailure(
@@ -120,7 +120,7 @@ class CountdownService : Service() {
 				) {
 					updateFinalNotification(false)
 					powerManager.releaseWakeLock()
-					networkManager.releaseWifiLock()
+					wifiManager.releaseWifiLock()
 				}
 			},
 		)

@@ -48,6 +48,8 @@ dependencies {
 	implementation(libs.retrofit.converter.gson)
 	implementation(libs.xlog)
 	testImplementation(libs.junit)
+	testImplementation(libs.androidx.junit)
+	testImplementation(libs.truth)
 	androidTestImplementation(libs.androidx.junit)
 	androidTestImplementation(libs.androidx.espresso.core)
 }
