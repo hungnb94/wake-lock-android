@@ -22,7 +22,6 @@ import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
-import java.util.concurrent.TimeUnit
 import kotlin.math.abs
 
 private const val CHANNEL_ID = "CountdownChannel"
@@ -46,7 +45,7 @@ class CountdownService : Service() {
 		logger.d("onStartCommand")
 		createNotificationChannel()
 		startForeground(NOTIFICATION_ID, buildNotification(DURATION.toInt()))
-		powerManager.acquireWakeLock(this, TimeUnit.SECONDS.toMillis(DURATION))
+		powerManager.acquireWakeLock(this)
 		wifiManager.acquireWifiLock(this)
 		startCountdown()
 		return super.onStartCommand(intent, flags, startId)
