@@ -60,3 +60,4 @@ This example serves as a basic introduction to using Wake Locks on Android.
 ## Testing
  - Unable to test power mode when device is connected via a usb cable
  - Use file logging to capture log and analyze later
+ - [Test power-related issues](https://developer.android.com/topic/performance/power/test-power)!  and [Test with Doze and App Standby](https://developer.android.com/training/monitoring-device-state/doze-standby#testing_doze)! work well only for testing network connection.
