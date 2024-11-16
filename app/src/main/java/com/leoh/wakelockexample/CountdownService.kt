@@ -38,14 +38,18 @@ class CountdownService : Service() {
 	private val powerManager = PowerLockManager()
 	private val wifiManager = WifiLockManager()
 
-	override fun onCreate() {
-		super.onCreate()
-		logger.d("onCreate")
+	override fun onStartCommand(
+		intent: Intent?,
+		flags: Int,
+		startId: Int,
+	): Int {
+		logger.d("onStartCommand")
 		createNotificationChannel()
 		startForeground(NOTIFICATION_ID, buildNotification(DURATION.toInt()))
 		powerManager.acquireWakeLock(this, TimeUnit.SECONDS.toMillis(DURATION))
 		wifiManager.acquireWifiLock(this)
 		startCountdown()
+		return super.onStartCommand(intent, flags, startId)
 	}
 
 	private fun createNotificationChannel() {
