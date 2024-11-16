@@ -56,3 +56,7 @@ public class WakeLockExample {
 - Best Practices: Always wrap Wake Lock acquisition in a try-finally block, or use an onDestroy() method in a Service to ensure it’s released properly.
 
 This example serves as a basic introduction to using Wake Locks on Android.
+
+## Testing
+ - Unable to test power mode when device is connected via a usb cable
+ - Use file logging to capture log and analyze later
