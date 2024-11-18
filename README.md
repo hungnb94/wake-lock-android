@@ -44,6 +44,16 @@ public class WakeLockExample {
 }
 ```
 
+## Step 3: Start a foreground service (This is very important, if you stop foreground service, wake lock could be release)
+```kotlin
+val serviceIntent = Intent(this, WakeLockService::class.java)
+if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+	startForegroundService(serviceIntent)
+} else {
+	startService(serviceIntent)
+}
+```
+
 ## Explanation
 
 - Acquire Wake Lock: The acquireWakeLock() method initializes the Wake Lock with a PARTIAL_WAKE_LOCK flag, allowing only the CPU to stay awake. The acquire() method is given a timeout of 10 minutes, after which the lock will automatically release if not done manually.
